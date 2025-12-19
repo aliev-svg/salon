@@ -244,11 +244,52 @@ body {
   align-items: center;
   padding: 14px;
   margin-bottom: 10px;
-  background: #f5f5f5;
+  background: #a91313;
   border-radius: 8px;
 }
 
 .basket-actions {
   display: flex;
   gap: 8px;
+}
+
+.site-header {
+  background: #0b0b0b;
+  padding: 16px 0;
+  color: rgb(217, 18, 18);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: rgb(253, 253, 253);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.basket-link {
+  background: rgb(255, 255, 255);
+  padding: 6px 12px;
+  border-radius: 6px;
 }

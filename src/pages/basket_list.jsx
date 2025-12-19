@@ -1,44 +1,37 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { basketApi } from "../services/basketApi";
+import { useBasket } from "../context/BasketContext";
 
 export default function BasketList() {
-  const [orders, setOrders] = useState([]);
+  const { basket, removeFromBasket } = useBasket();
 
-  useEffect(() => {
-    basketApi.getAll().then((data) => setOrders(data));
-  }, []);
-
-  function handleDelete(id) {
-    basketApi.remove(id);
-    setOrders(basketApi.getAll());
+  if (basket.length === 0) {
+    return (
+      <div className="page">
+        <h2>Корзина пуста</h2>
+        <Link to="/">← Вернуться к авто</Link>
+      </div>
+    );
   }
 
   return (
     <div className="page">
-      <h1>Корзина заказов</h1>
+      <h2>Корзина</h2>
 
-      <Link to="/create-order" className="btn">
-        ➕ Создать заказ
-      </Link>
+      {basket.map((car) => (
+        <div key={car.id} className="basket-item">
+          <img src={car.img} width="120" />
+          <div>
+            <h3>{car.brand} {car.model}</h3>
+            <p>{car.price}</p>
 
-      {orders.length === 0 ? (
-        <p>Корзина пуста</p>
-      ) : (
-        <ul className="basket-list">
-          {orders.map(order => (
-            <li key={order.id} className="basket-item">
-              <strong>{order.title}</strong> — ${order.price}
+            <button onClick={() => removeFromBasket(car.id)}>
+              Удалить
+            </button>
+          </div>
+        </div>
+      ))}
 
-              <div className="basket-actions">
-                <Link to={`/basket/${order.id}`}>Открыть</Link>
-                <Link to={`/update-order/${order.id}`}>✏️</Link>
-                <button onClick={() => handleDelete(order.id)}>🗑</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+      <Link to="/">← Назад</Link>
     </div>
   );
 }
