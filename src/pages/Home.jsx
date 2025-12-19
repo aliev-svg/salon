@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="page">
       <header className="site-header">
-        <h1>AvtoHome</h1>
+
         <p className="subtitle"></p>
       </header>
 
